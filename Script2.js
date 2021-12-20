@@ -1,13 +1,14 @@
 // JavaScript source code
 
-//$( document ).ready(function() {
+$( document ).ready(function() {
 
     for(let i = 0; i<= 10; i++){
-       new PopUp('Lailololeilo lala',  { my: "right+" + i*10 + " top-" + i*10 + "%"}).showPopUp();
+       popUp1 = new PopUp('Lailololeilo lala',  { my: "right+" + i*10 + " top-" + i*10 + "%"});
+       popUp1.showPopUp();
 
     }
     
-//});
+});
 
 class PopUp {
   constructor(message, position) {
