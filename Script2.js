@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
 		})();
     
-//Test
+    //Test
     popUpStart = new PopUp1('Pop up 1',  { my: "center", at: "left"}, "Ignore", function(){$( this ).dialog( "close" ); });
     popUpStart.showPopUp();
     
@@ -48,7 +48,7 @@ $( document ).ready(function() {
           popUpStart.showPopUp();
       }
 
-      //popup in a loop times
+      //popup x times
       if ((n % 10 == 0)&&(n/20 > 2)&&(n/20 < 4))
       {
           popUpStart = new PopUp1('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
@@ -59,6 +59,11 @@ $( document ).ready(function() {
           //  popUpStart.showPopUp();
    
       }
+
+      //Loop intensifies
+     // if ((n % 10 == 0)&&(n/20 > 2)&&(n/20 < 4))
+
+     // }
 
 
       console.log("n: " + n );
@@ -178,3 +183,5 @@ class PopUp3 {
 
   }
 }
+
+
