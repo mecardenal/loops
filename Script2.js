@@ -49,7 +49,8 @@ $( document ).ready(function() {
       }
 
       //popup x times
-      if ((n % 5 == 0)&&(n/10 > 2)&&(n/10 < 4))
+      //if ((n % 5 == 0)&&(n/10 > 2)&&(n/10 < 4))
+      if (n == 25)
       {
           popUpStart = new PopUp1('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
           popUpStart.showPopUp();
@@ -94,13 +95,14 @@ $( document ).ready(function() {
 
 //PopUp1: with closing button (X) and 1 button
 class PopUp1 {
-  constructor(message, position, button1text, button1function) {
+  constructor(message, position, button1text, button1function) 
+  {
     this.message = message;
     this.position = position;
 
     this.showPopUp = function() {
         $('#popups').prepend('<div id="dialog" title="ERROR"><p>' + message + '</p></div>');    
-         $("#dialog").dialog({
+        $("#dialog").dialog({
           modal: true,
           hide: { effect: "slide", duration: 500 },
           show: { effect: "bounce", duration: 400 },
@@ -110,11 +112,19 @@ class PopUp1 {
             [
                 {
                   text: button1text,
-                  click: button1function                
+                  click: button1function
                 }
             ]
 
-        }).prev(".ui-dialog-titlebar").css("background","red"); 
+        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").on("click",function()
+          {
+            var posR = Math.floor(Math.random() * (100 - (-100)) ) + (-100);
+            var posT = Math.floor(Math.random() * (50 - (-60)) ) + (-60);
+
+            var repeatPU = new PopUp1(message, {my: "right+" + posR, at: "top-" + posT, of: this}, button1text, button1function);
+            repeatPU.showPopUp();
+            //return false;
+          }); 
       };
 
 
@@ -148,7 +158,7 @@ class PopUp2 {
                 }
             ]
 
-        }).prev(".ui-dialog-titlebar").css("background","red"); 
+        }).prev(".ui-dialog-titlebar").css("background","red");
       };
 
 
@@ -186,6 +196,11 @@ class PopUp3 {
   }
 }
 
+
+function ReplicatePopUp() {
+
+
+}
 
 
 //Disable right click
