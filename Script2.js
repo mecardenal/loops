@@ -13,7 +13,7 @@ $( document ).ready(function() {
 			});
 
 		})();
-    
+    /*
     //Test
     popUpStart = new PopUp1('Pop up 1',  { my: "center", at: "left"}, "Ignore", function(){$( this ).dialog( "close" ); });
     popUpStart.showPopUp();
@@ -23,7 +23,7 @@ $( document ).ready(function() {
 
     popUpStart = new PopUp3('Pop up 3',  { my: "center", at: "right"}, "Ignore", function(){$( this ).dialog( "close" ); });
     popUpStart.showPopUp();
-
+    */
         
     //Counts how many times mouse is over a square    
     var n = 0;
@@ -49,17 +49,19 @@ $( document ).ready(function() {
       }
 
       //popup x times
-      if ((n % 10 == 0)&&(n/20 > 2)&&(n/20 < 4))
+      if ((n % 5 == 0)&&(n/10 > 2)&&(n/10 < 4))
       {
           popUpStart = new PopUp1('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
           popUpStart.showPopUp();
-          
-
           //  popUpStart = new PopUp2('Something is not right',  { my: "center", at: "center"});
           //  popUpStart.showPopUp();
    
       }
 
+      if(n == 40){
+          popUpStart = new PopUp3('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
+
+      }
       //Loop intensifies
      // if ((n % 10 == 0)&&(n/20 > 2)&&(n/20 < 4))
 
@@ -185,3 +187,6 @@ class PopUp3 {
 }
 
 
+
+//Disable right click
+//document.addEventListener('contextmenu', event => event.preventDefault());
