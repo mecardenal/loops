@@ -8,7 +8,7 @@
 body {
 	font-family: 'Overpass Mono', monospace;
 	color: #edecf2;
-	background: #37373e;
+	*background: #37373e;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -154,6 +154,8 @@ a:focus {
 	padding: 0 7em;
 	perspective: 800px;
 	perspective-origin: 50% 100%;
+	width: 1200px;
+    margin-top: 100px;
 }
 
 .grid__item {
@@ -161,7 +163,7 @@ a:focus {
 	display: block;
 	flex: none;
 	width: 110px;
-	margin: 1.5em 2vw;
+	margin: 1px;
 	cursor: default;
 	transform-style: preserve-3d;
 }
@@ -232,6 +234,7 @@ a:focus {
 	height: 100%;
 	cursor: pointer;
 	transform-origin: 50% 100%;
+	 *   border: 0.5px solid #00000040;
 }
 
 .stack__img {

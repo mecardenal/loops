@@ -4,7 +4,7 @@ $( document ).ready(function() {
 
     //Creating grid for background
 
-    for(let i = 0; i< 15; i++){
+    for(let i = 0; i< 56; i++){
         $( "#square_ref" ).clone().appendTo( "#grid_container" ).show();
     }
          (function() {
@@ -13,17 +13,17 @@ $( document ).ready(function() {
 			});
 
 		})();
-    /*
-    //Test
-    popUpStart = new PopUp1('Pop up 1',  { my: "center", at: "left"}, "Ignore", function(){$( this ).dialog( "close" ); });
-    popUpStart.showPopUp();
     
-    popUpStart = new PopUp2('Pop up 2',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); }, "Ignore", function(){$( this ).dialog( "close" ); });
-    popUpStart.showPopUp();
+    //Test
+    //popUpStart = new PopUp1('Pop up 1',  { my: "center", at: "left"}, "Ignore", function(){$( this ).dialog( "close" ); });
+    //popUpStart.showPopUp();
+    
+    //popUpStart = new PopUp2('Pop up 2',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
+   // popUpStart.showPopUp();
 
-    popUpStart = new PopUp3('Pop up 3',  { my: "center", at: "right"}, "Ignore", function(){$( this ).dialog( "close" ); });
-    popUpStart.showPopUp();
-    */
+    //popUpStart = new PopUp3('Pop up 3',  { my: "center", at: "right"});
+    //popUpStart.showPopUp();
+    
         
     //Counts how many times mouse is over a square    
     var n = 0;
@@ -44,7 +44,7 @@ $( document ).ready(function() {
       //First popup
       if (n == 19)
       {
-          popUpStart = new PopUp1('But is it actually going well?',  { my: "center", at: "center"}, "Sure", function(){$( this ).dialog( "close" ); });
+          popUpStart = new PopUp2('But is it actually going well?',  { my: "center", at: "center"}, "Sure");
           popUpStart.showPopUp();
       }
 
@@ -52,15 +52,13 @@ $( document ).ready(function() {
       //if ((n % 5 == 0)&&(n/10 > 2)&&(n/10 < 4))
       if (n == 25)
       {
-          popUpStart = new PopUp1('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
+          popUpStart = new PopUp3('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
           popUpStart.showPopUp();
-          //  popUpStart = new PopUp2('Something is not right',  { my: "center", at: "center"});
-          //  popUpStart.showPopUp();
    
       }
 
       if(n == 40){
-          popUpStart = new PopUp3('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
+          //popUpStart = new PopUp3('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
 
       }
       //Loop intensifies
@@ -94,9 +92,39 @@ $( document ).ready(function() {
 });
 
 //PopUp1: with closing button (X) and 1 button
-class PopUp1 {
+class PopUp3 {
   constructor(message, position, button1text, button1function) 
   {
+    this.message = message;
+    this.position = position;
+
+    this.showPopUp = function() {
+        $('#popups').prepend('<div id="dialog" title="ERROR"><p>' + message + '</p></div>');    
+        $("#dialog").dialog({
+          modal: true,
+          hide: { effect: "slide", duration: 500 },
+          show: { effect: "bounce", duration: 400 },
+          draggable: true,
+          position: position
+
+        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").on("click",function()
+          {
+            var posR = Math.floor(Math.random() * (100 - (-100)) ) + (-100);
+            var posT = Math.floor(Math.random() * (50 - (-60)) ) + (-60);
+
+            var repeatPU = new PopUp3(message, {my: "right+" + posR, at: "top-" + posT, of: this}, button1text, button1function);
+            repeatPU.showPopUp();
+            //return false;
+          }); 
+      };
+
+
+  }
+}
+
+//PopUp2: with closing button (X) and 2 buttons
+class PopUp2 {
+  constructor(message, position, button1text) {
     this.message = message;
     this.position = position;
 
@@ -112,63 +140,28 @@ class PopUp1 {
             [
                 {
                   text: button1text,
-                  click: button1function
+                  click: function(){}
                 }
             ]
 
-        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").on("click",function()
-          {
-            var posR = Math.floor(Math.random() * (100 - (-100)) ) + (-100);
-            var posT = Math.floor(Math.random() * (50 - (-60)) ) + (-60);
-
-            var repeatPU = new PopUp1(message, {my: "right+" + posR, at: "top-" + posT, of: this}, button1text, button1function);
-            repeatPU.showPopUp();
-            //return false;
-          }); 
+        }).prev(".ui-dialog-titlebar").css("background","red").next().next().children().mouseover(function()
+            {
+                 $( this ).parent().css("float","left");
+            }).mouseout(function()
+            {
+                 $( this ).parent().css("float","right");
+            });
+     
       };
 
 
   }
 }
 
-//PopUp2: with closing button (X) and 2 buttons
-class PopUp2 {
-  constructor(message, position, button1text, button1function, button2text, button2function) {
-    this.message = message;
-    this.position = position;
+               
 
-    this.showPopUp = function() {
-        $('#popups').prepend('<div id="dialog" title="ERROR"><p>' + message + '</p></div>');    
-         $("#dialog").dialog({
-          modal: true,
-          hide: { effect: "slide", duration: 500 },
-          show: { effect: "bounce", duration: 400 },
-          draggable: true,
-          position: position,
-          buttons: 
-            [
-                {
-                  text: button1text,
-                  click: button1function
-                },
-                {
-                  text: button2text,
-                 // icon: "ui-icon-heart",
-                  click: button2function
-                }
-            ]
-
-        }).prev(".ui-dialog-titlebar").css("background","red");
-      };
-
-
-  }
-}
-
-
-
-//PopUp3: No closing button (X), 1 button
-class PopUp3 {
+//PopUp1: No closing button (X), 1 button
+class PopUp1 {
   constructor(message, position, button1text, button1function) {
     this.message = message;
     this.position = position;
@@ -189,7 +182,7 @@ class PopUp3 {
                 }
             ]
 
-        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").hide(); 
+        }).prev(".ui-dialog-titlebar").css("background","red"); 
       };
 
 
@@ -205,3 +198,6 @@ function ReplicatePopUp() {
 
 //Disable right click
 //document.addEventListener('contextmenu', event => event.preventDefault());
+
+//hide close button
+//.children(".ui-dialog-titlebar-close").hide(); 
