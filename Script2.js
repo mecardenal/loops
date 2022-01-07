@@ -220,7 +220,7 @@ function replicatePopUp(message)
         var posR = Math.floor(Math.random() * (150 - (-250)) ) + (-250);
         var posT = Math.floor(Math.random() * (100 - (0)) ) + (0);
 
-        var repeatPU = new PopUp1(message, {my: "left+" + posR + "%", at: "bottom-" + posT + "%"});
+        var repeatPU = new PopUp3(message, {my: "left+" + posR + "%", at: "bottom-" + posT + "%"});
         repeatPU.showPopUp();
 
               
