@@ -59,7 +59,6 @@ $( document ).ready(function() {
 
       if(n == 40){
           //popUpStart = new PopUp3('You should be taking care of more important stuff, but still here you are',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
-
       }
       //Loop intensifies
      // if ((n % 10 == 0)&&(n/20 > 2)&&(n/20 < 4))
@@ -67,7 +66,7 @@ $( document ).ready(function() {
      // }
 
 
-      console.log("n: " + n );
+     // console.log("n: " + n );
      });
 
 
@@ -91,9 +90,12 @@ $( document ).ready(function() {
 
 });
 
+
+var numLoops = 0;
 //PopUp1: with closing button (X) and 1 button
+//Closing button generates new popups
 class PopUp3 {
-  constructor(message, position, button1text, button1function) 
+  constructor(message, position) 
   {
     this.message = message;
     this.position = position;
@@ -101,20 +103,36 @@ class PopUp3 {
     this.showPopUp = function() {
         $('#popups').prepend('<div id="dialog" title="ERROR"><p>' + message + '</p></div>');    
         $("#dialog").dialog({
-          modal: true,
+          //modal: true,
           hide: { effect: "slide", duration: 500 },
           show: { effect: "bounce", duration: 400 },
           draggable: true,
           position: position
 
-        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").on("click",function()
+        }).prev(".ui-dialog-titlebar").css("background","red").children(".ui-dialog-titlebar-close").on("click",function(event, ui)
           {
-            var posR = Math.floor(Math.random() * (100 - (-100)) ) + (-100);
-            var posT = Math.floor(Math.random() * (50 - (-60)) ) + (-60);
 
-            var repeatPU = new PopUp3(message, {my: "right+" + posR, at: "top-" + posT, of: this}, button1text, button1function);
-            repeatPU.showPopUp();
-            //return false;
+
+            if(numLoops < 5)
+            {
+              for(var i = 0; ((i <= numLoops) && (i < 5)) ; i++)
+              {
+                  setTimeout(replicatePopUp,1000,message); 
+              }
+              numLoops++;
+            }
+            else
+            {
+              for(var i = 0; (i <= 30) ; i++)
+              {
+                  setTimeout(replicatePopUp,1000,message); 
+              }
+              setTimeout(blueScreen,4000); 
+                //console.log("MAUYOR QUE 5");
+               // replicatePopUp(message,"30");  
+            }
+              
+          
           }); 
       };
 
@@ -190,11 +208,23 @@ class PopUp1 {
 }
 
 
-function ReplicatePopUp() {
-
-
+function blueScreen() 
+{
+    $(".ui-dialog").hide();
+    $("#blue_screen").show();
 }
 
+function replicatePopUp(message)
+{
+
+        var posR = Math.floor(Math.random() * (150 - (-250)) ) + (-250);
+        var posT = Math.floor(Math.random() * (100 - (0)) ) + (0);
+
+        var repeatPU = new PopUp1(message, {my: "left+" + posR + "%", at: "bottom-" + posT + "%"});
+        repeatPU.showPopUp();
+
+              
+}
 
 //Disable right click
 //document.addEventListener('contextmenu', event => event.preventDefault());
