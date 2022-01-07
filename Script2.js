@@ -123,9 +123,10 @@ class PopUp3 {
             }
             else
             {
-              for(var i = 0; (i <= 30) ; i++)
+              for(var i = 0; (i <= 40) ; i++)
               {
-                  setTimeout(replicatePopUp,1000,message); 
+//                  setTimeout(replicatePopUp,1000,message); 
+                                    replicatePopUp(message);
               }
               setTimeout(blueScreen,4000); 
                 //console.log("MAUYOR QUE 5");

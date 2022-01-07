@@ -150,13 +150,13 @@ a:focus {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	*width: 100%;
 	/*padding: 0 7em;*/
-	margin-top:30px;
 	perspective: 800px;
 	perspective-origin: 50% 100%;
-	width: 1200px;
+	width: 990px;
     margin-top: 100px;
+	margin-left:150px;
 }
 
 .grid__item {
