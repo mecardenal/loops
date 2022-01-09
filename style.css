@@ -1,4 +1,66 @@
 ﻿body
 {
-background: url("img/lineas_trans.png");
+	background: url("img/lineas_trans.png");
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.safemode
+{
+	color:black;
+	position:absolute;
+	padding:8px 14px;
+	font-size:20px;
+	display:none;
+}
+
+.leftup
+{
+	left:0px;
+	top:0px;
+}
+
+.rightup
+{
+	right:0px;
+}
+
+.rightbottom
+{
+	right:0px;
+	bottom:0px;
+}
+
+.leftbottom
+{
+	left:0px;
+	bottom:0px;
+}
+
+.error_icon
+{
+    margin-right: 7px;
+    vertical-align: -45%;
+	float:left;
+}
+
+.error_message
+{
+    float: left;
+    width: 221px;
+}
+
+.popup_content
+{
+	margin-top: 17px;
+}
+
+#safemode_button
+{
+	position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    background-color: #ffffff47;
+    padding: 10px 20px;
+    border: 1px solid;
 }
