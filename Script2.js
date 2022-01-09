@@ -264,9 +264,10 @@ function chufle() {
     var parent = $("#grid_container");
     var divs = parent.children();
     while (divs.length) {
-        parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+       parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
     }
 }
+
 
 //Disable right click
 //document.addEventListener('contextmenu', event => event.preventDefault());
