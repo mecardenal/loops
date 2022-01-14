@@ -3,7 +3,7 @@
 $( document ).ready(function() {
 
     GeneratePuzzlePieces();
-    //chufle();
+    chufle();
     assignPosPiece();
     
         // (function() {
@@ -39,14 +39,14 @@ $( document ).ready(function() {
       if (n == 9)
       {
           popUpStart = new PopUp1('This is going well. So far.',  { my: "center", at: "center"}, "Ok", function(){$( this ).dialog( "close" ); });
-        //  popUpStart.showPopUp();
+          popUpStart.showPopUp();
       }
 
       //First popup
       if (n == 19)
       {
           popUpStart = new PopUp2('But is it actually going well?',  { my: "center", at: "center"}, "Sure");
-      //    popUpStart.showPopUp();
+          popUpStart.showPopUp();
       }
 
       //popup x times
@@ -54,7 +54,7 @@ $( document ).ready(function() {
       if (n == 25)
       {
           popUpStart = new PopUp3("Oh you are trying to ignore me, that's cute <3",  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
-        //  popUpStart.showPopUp();
+          popUpStart.showPopUp();
    
       }
 
@@ -184,7 +184,7 @@ class PopUp3 {
     this.showPopUp = function() {
         $('#popups').prepend('<div id="dialog" title="FATAL ERROR"><div class="popup_content"><img src="img/Flat_cross_icon.svg" width="30px" class="error_icon"><div class="error_message">' + message + '</div></div></div>');    
         $("#dialog").dialog({
-          modal: true,
+         // modal: true,
           hide: { effect: "slide", duration: 500 },
           show: { effect: "bounce", duration: 400 },
           //draggable: true,
@@ -226,6 +226,7 @@ class PopUp3 {
 function blueScreen() 
 {
     $(".ui-dialog").remove();
+        $("#popups").remove();
     $("#blue_screen").show();
 }
 
@@ -260,7 +261,7 @@ function GeneratePuzzlePieces()
     for(let i = 0; i< 28; i++){
         
         //Creates pieces of puzzle 
-        $( "#square_ref" ).clone().appendTo( "#grid_container" ).show().find(".puzzle_piece").css("background-image","url(img/sketch_brainloop_guideColor.png)").css("background-position","left "+ leftPX +"px top "+ topPX +"px").parent().parent().parent().attr('idPiece', idPiece).attr('id', '');
+        $( "#square_ref" ).clone().appendTo( "#grid_container" ).show().find(".puzzle_piece").css("background-image","url(img/landscape_pink.png)").css("background-position","left "+ leftPX +"px top "+ topPX +"px").parent().parent().parent().attr('idPiece', idPiece).attr('id', '');
 
         //Starts horizontal iteration
         if(numH < 6) 
@@ -349,7 +350,7 @@ function switchPieces(idpA,idpB) {
 }
 
 function checkSuccess(){
-console.log("CHECKING");
+
     var j = 1;
     var id;
     var success = true;
@@ -367,7 +368,7 @@ console.log("CHECKING");
     });
 
     if(success == true){
-    alert( "TIMON LEDEEEER");
+    alert( "CONGRATS YOU SOLVED THE PUZZLE");
     }
 
 }
