@@ -22,16 +22,25 @@ $( document ).ready(function() {
 
     //popUpStart = new PopUp3('Pop up 3',  { my: "center", at: "right"});
     //popUpStart.showPopUp();
-    
+ 
+   // popUpStart = new PopUp4('Pop up 4',  { my: "center", at: "middle"});
+    //popUpStart.showPopUp();   
         
     //Counts how many times mouse is over a square    
     var n = 0;
-    
+    //times on safe mode
+    var sm = 0;
+
     $( "div.stack" )
       .mouseenter(function() {
       
       
       n += 1;
+
+      if(safemode == 1)
+      {
+            sm++;
+      }
    
       //Popups every n times
 
@@ -57,7 +66,14 @@ $( document ).ready(function() {
           popUpStart.showPopUp();
    
       }
+      console.log("safemode status " + safemode + " / sm " + sm);
+      if (sm == 5)
+      {          console.log("POP UP 4");
+          popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
+          popUpStart.showPopUp();
 
+          
+      }
 
      // console.log("n: " + n );
      });
@@ -182,7 +198,7 @@ class PopUp3 {
     this.position = position;
 
     this.showPopUp = function() {
-        $('#popups').prepend('<div id="dialog" title="FATAL ERROR"><div class="popup_content"><img src="img/Flat_cross_icon.svg" width="30px" class="error_icon"><div class="error_message">' + message + '</div></div></div>');    
+        $('#popups').prepend('<div id="dialog" title="FATAL ERROR"><div class="popup_content"><img src="img/Flat_cross_icon.svg" width="30px" class="error_icon" id="error_icon"><div class="error_message">' + message + '</div></div></div>');    
         $("#dialog").dialog({
          // modal: true,
           hide: { effect: "slide", duration: 500 },
@@ -210,7 +226,6 @@ class PopUp3 {
                     replicatePopUp(message);
               }
               setTimeout(blueScreen,4000); 
-                //console.log("MAUYOR QUE 5");
                // replicatePopUp(message,"30");  
             }
               
@@ -223,10 +238,134 @@ class PopUp3 {
 }
 
 
+//PopUp4: No closing button (X), 1 button
+class PopUp4 {
+  constructor(message, position) {
+    this.message = message;
+    this.position = position;
+
+    this.showPopUp = function() {
+         $('#popups').prepend('<div id="dialog" title="FATAL ERROR"><div class="popup_content"><div  id="error_icon"><img src="img/Flat_cross_icon.svg" width="30px" class="error_icon" ></div><div class="error_message">' + message + '</div></div></div>');    
+         $("#dialog").dialog({
+          modal: true,
+          hide: { effect: "slide", duration: 500 },
+          show: { effect: "bounce", duration: 400 },
+          draggable: false,
+          position: position
+        
+        }).prev(".ui-dialog-titlebar").css("background","#ff3e30").css("height","35px").children(".ui-button").hide().prev().attr("id","pu_title_error"); 
+         
+        dragErrorTitle(pu_title_error);
+        dragErrorTitle(error_icon);
+      };
+
+
+  }
+}
+    var deletedElem = 0;
+
+function dragErrorTitle(draggabbleElement){
+    
+   // pu_title_error.css("color","green");
+   //$("#pu_title_error").append("<img src='img/delete.svg' id='trash_icon' style='display:none'>");
+
+    let currentDroppable = null;
+
+
+    draggabbleElement.onmousedown = function(event) {
+
+      let shiftX = event.clientX - draggabbleElement.getBoundingClientRect().left;
+      let shiftY = event.clientY - draggabbleElement.getBoundingClientRect().top;
+
+      draggabbleElement.style.position = 'absolute';
+      draggabbleElement.style.zIndex = 1000;
+      document.body.append(draggabbleElement);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        draggabbleElement.style.left = pageX - shiftX + 'px';
+        draggabbleElement.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        draggabbleElement.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        draggabbleElement.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.trashcan_container');
+        
+        if (currentDroppable != droppableBelow) 
+        {
+          if (currentDroppable) 
+          { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+
+          currentDroppable = droppableBelow;
+          
+          if (currentDroppable) 
+          { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      draggabbleElement.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        //pu_title_error.onmouseup = null;
+        if($(".trashcan_open").is(":visible")){
+            draggabbleElement.style.display = 'none';
+            $(".trashcan_open").hide();
+            $(".trashcan").show();
+            deletedElem++;
+          
+            //all elements deleted
+            if(deletedElem == 2)
+            {
+                $(".ui-dialog-titlebar").css("background","none").css("border","none").parent().css("background","#ffffff9e" ).animate({
+                    top : '80%',
+                    left: '0px'
+                });
+
+                $(".ui-widget-overlay").fadeOut();
+            }
+
+        }
+        
+      };
+
+    };
+
+    function enterDroppable(elem) {
+      $(".trashcan_open").show();
+      $(".trashcan").hide();
+    }
+
+    function leaveDroppable(elem) {
+      $(".trashcan").show();
+      $(".trashcan_open").hide();
+    }
+
+    draggabbleElement.ondragstart = function() {
+      return false;
+    };
+ 
+}
+
+
 function blueScreen() 
 {
     $(".ui-dialog").remove();
-        $("#popups").remove();
+    $("#popups").empty();
     $("#blue_screen").show();
 }
 
@@ -242,10 +381,14 @@ function replicatePopUp(message)
               
 }
 
+var safemode = 0;
+
 //Restart game in safe mode on clicking the button
 $("#safemode_button").on("click",function(){
     $("#blue_screen").remove();
     $(".safemode").show();
+    $(".trashcan_container").show();
+    safemode = 1;
 });
 
 function GeneratePuzzlePieces()
