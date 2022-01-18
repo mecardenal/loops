@@ -7,10 +7,10 @@
 
 .safemode
 {
-	color:black;
+	color:white;
 	position:absolute;
 	padding:8px 14px;
-	font-size:20px;
+	font-size:35px;
 	display:none;
 }
 
@@ -93,10 +93,10 @@
 
 .trashcan_container
 {
-    height: 100px;
-    width: 100px;
+    *height: 100px;
+    *width: 100px;
     position: absolute;
-    top: 40px;
+    top: 50%;
     left: 10px;
 	
 	z-index:102;
@@ -106,4 +106,50 @@
 .ui-widget-overlay
 {
 	background-color:#f90d0d14 !important; 
+		z-index:1 !important;
+}
+
+#grid_container
+{
+    width: 1120px;
+    margin: 0px auto;
+	padding-top: 100px;
+}
+
+a[issel="selA"] , a[issel="selB"] 
+{
+    outline: 2px solid white;
+}
+
+#winning_screen
+{
+    font-size: 200px;
+    background-color: #00000061;
+    padding: 20px 78px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    /* left: 50%; */
+    width: 100%;
+    text-align: center;
+    box-shadow: 1px 0px 20px 16px #00000061;
+
+}
+
+#winning_screen a
+{
+    text-decoration: underline;
+    color: #ffbc00;
+    font-size: 70px;
+}
+
+#restart_button
+{
+    width: 100%;
+    text-align: center;
+	color:white;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 20px;
+	font-size: 20px;
 }

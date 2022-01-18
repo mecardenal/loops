@@ -35,45 +35,9 @@ $( document ).ready(function() {
       .mouseenter(function() {
       
       
-      n += 1;
+     // n += 1;
 
-      if(safemode == 1)
-      {
-            sm++;
-      }
-   
-      //Popups every n times
-
-      //First popup
-      if (n == 9)
-      {
-          popUpStart = new PopUp1('This is going well. So far.',  { my: "center", at: "center"}, "Ok", function(){$( this ).dialog( "close" ); });
-          popUpStart.showPopUp();
-      }
-
-      //First popup
-      if (n == 19)
-      {
-          popUpStart = new PopUp2('But is it actually going well?',  { my: "center", at: "center"}, "Sure");
-          popUpStart.showPopUp();
-      }
-
-      //popup x times
-      //if ((n % 5 == 0)&&(n/10 > 2)&&(n/10 < 4))
-      if (n == 25)
-      {
-          popUpStart = new PopUp3("Oh you are trying to ignore me, that's cute <3",  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
-          popUpStart.showPopUp();
-   
-      }
-      console.log("safemode status " + safemode + " / sm " + sm);
-      if (sm == 5)
-      {          console.log("POP UP 4");
-          popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
-          popUpStart.showPopUp();
-
-          
-      }
+     
 
      // console.log("n: " + n );
      });
@@ -87,6 +51,17 @@ $( document ).ready(function() {
     var idpB = 0;
 
     $(".grid__item").click(function() {
+
+      //counter of clicks on the puzzle
+      n++;
+
+      //counter of clicks on the puzzle on Safe Mode
+      if(safemode == 1)
+      {
+         sm++;
+      }
+
+        //Select pieces to switch
         if(pAsel == 0)
         {
             $(this).attr("isSel", "selA"); 
@@ -113,6 +88,42 @@ $( document ).ready(function() {
                
             }
         }
+
+
+         //Popups every n times
+
+      //First popup
+      if (n == 9)
+      {
+          popUpStart = new PopUp1('This is going well. So far.',  { my: "center", at: "center"}, "Ok", function(){$( this ).dialog( "close" ); });
+          popUpStart.showPopUp();
+      }
+
+      //First popup
+      if (n == 19)
+      {
+          popUpStart = new PopUp2('But is it actually going well?',  { my: "center", at: "center"}, "Sure");
+          popUpStart.showPopUp();
+      }
+
+      //popup x times
+      if (n == 25)
+      {
+          popUpStart = new PopUp3("Oh you are trying to ignore me, that's cute <3",  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
+          popUpStart.showPopUp();
+   
+      }
+     
+
+   
+      if (sm == 5)
+      {      
+          popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
+          popUpStart.showPopUp();
+
+      }
+
+ 
     });  
 });
 
@@ -125,7 +136,7 @@ class PopUp1 {
     this.position = position;
 
     this.showPopUp = function() {
-        $('#popups').prepend('<div id="dialog" title="System Message"><p>' + message + '</p></div>');    
+        $('#popups').prepend('<div id="dialog" title="Regular thought"><p>' + message + '</p></div>');    
          $("#dialog").dialog({
           modal: true,
           hide: { effect: "slide", duration: 500 },
@@ -188,8 +199,8 @@ class PopUp2 {
 
               
 
-var numLoops = 0;
-//PopUp1: with closing button (X) and 1 button
+var numLoops = 1;
+
 //Closing button generates new popups
 class PopUp3 {
   constructor(message, position) 
@@ -210,9 +221,9 @@ class PopUp3 {
           {
 
 
-            if(numLoops < 5)
+            if(numLoops < 6)
             {
-              for(var i = 0; ((i <= numLoops) && (i < 5)) ; i++)
+              for(var i = 0; ((i <= numLoops) && (i < 6)) ; i++)
               {
                   setTimeout(replicatePopUp,1000,message); 
               }
@@ -225,6 +236,7 @@ class PopUp3 {
 //                  setTimeout(replicatePopUp,1000,message); 
                     replicatePopUp(message);
               }
+              
               setTimeout(blueScreen,4000); 
                // replicatePopUp(message,"30");  
             }
@@ -266,9 +278,6 @@ class PopUp4 {
 
 function dragErrorTitle(draggabbleElement){
     
-   // pu_title_error.css("color","green");
-   //$("#pu_title_error").append("<img src='img/delete.svg' id='trash_icon' style='display:none'>");
-
     let currentDroppable = null;
 
 
@@ -331,12 +340,12 @@ function dragErrorTitle(draggabbleElement){
             //all elements deleted
             if(deletedElem == 2)
             {
-                $(".ui-dialog-titlebar").css("background","none").css("border","none").parent().css("background","#ffffff9e" ).animate({
+                $(".ui-dialog-titlebar").css("background","none").css("border","none").parent().css("background","#ffffff9e" ).css("border","none").css("min-height","").css("width","auto").animate({
                     top : '80%',
                     left: '0px'
-                });
+                },2000).fadeOut(5000);
 
-                $(".ui-widget-overlay").fadeOut();
+                $(".ui-widget-overlay").fadeOut(5000);
             }
 
         }
@@ -388,6 +397,7 @@ $("#safemode_button").on("click",function(){
     $("#blue_screen").remove();
     $(".safemode").show();
     $(".trashcan_container").show();
+    chufle();
     safemode = 1;
 });
 
@@ -404,19 +414,19 @@ function GeneratePuzzlePieces()
     for(let i = 0; i< 15; i++){
         
         //Creates pieces of puzzle 
-        $( "#square_ref" ).clone().appendTo( "#grid_container" ).show().find(".puzzle_piece").css("background-image","url(img/landscape_pink.png)").css("background-position","left "+ leftPX +"px top "+ topPX +"px").parent().parent().parent().attr('idPiece', idPiece).attr('id', '');
+        $( "#square_ref" ).clone().appendTo( "#grid_container" ).show().find(".puzzle_piece").css("background-image","url(img/puzzle_bg.png)").css("background-position","left "+ leftPX +"px top "+ topPX +"px").parent().parent().parent().attr('idPiece', idPiece).attr('id', '');
 
         //Starts horizontal iteration
-        if(numH < 6) 
+        if(numH < 4) 
         {
-            leftPX = leftPX - 110;
+            leftPX = leftPX - 200;
             numH++;
         }
         else //Line break
         {
             numH = 0;
             leftPX = 0;
-            topPX = topPX -110;
+            topPX = topPX -200;
         }
        
         idPiece++;
@@ -424,20 +434,6 @@ function GeneratePuzzlePieces()
 }
 
 var orderPieces = [];
-
-
-/*
-2, 5, 7, 8, 9
-
-clicked = 5; clickedPosInArr = 1; 
-flagFirstClick = true;
-2clicked = 8; 2clickedPosInArr = 3;
-array[clickedPosInArr] = 2clicked;
-array[2clickedPosInArr] = clicked;
-
-2, 8, 7, 5, 9
-*/
-
 
 
 //Shuffle the pieces of the grid
@@ -481,9 +477,6 @@ function switchPieces(idpA,idpB) {
     orderPieces[posA] = idpB;
     orderPieces[posB] = idpA;
  
-    //I create a temp grid container
-    //$('.content').append('<div id="grid_container" class="grid grid--effect-vega"></div>');  
-
     for(i = 0; i < orderPieces.length; i++){
         $("#grid_container").append($("a[idpiece|='" + orderPieces[i] + "']"));
         $("a[idpiece|='" + orderPieces[i] + "']").attr('posPiece', i);
@@ -510,11 +503,24 @@ function checkSuccess(){
     });
 
     if(success == true){
-    alert( "CONGRATS YOU SOLVED THE PUZZLE");
+        $(".grid__item").off("click");
+
+        //setTimeout(theEndWin,1000);
+    $("#grid_container").fadeOut("slow",function(){
+        $("#winning_screen").fadeIn("slow");
+    });
+
     }
 
 }
 
+$("#restart_button").click(function(){
+   
+   var confirm_restart = confirm("Are you sure you want to restart the game?");
+   if (confirm_restart == true){
+          location.reload();
+   }
+});
 
 //Disable right click
 //document.addEventListener('contextmenu', event => event.preventDefault());
