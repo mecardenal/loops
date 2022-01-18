@@ -200,7 +200,7 @@ class PopUp3 {
     this.showPopUp = function() {
         $('#popups').prepend('<div id="dialog" title="FATAL ERROR"><div class="popup_content"><img src="img/Flat_cross_icon.svg" width="30px" class="error_icon" id="error_icon"><div class="error_message">' + message + '</div></div></div>');    
         $("#dialog").dialog({
-         // modal: true,
+          modal: true,
           hide: { effect: "slide", duration: 500 },
           show: { effect: "bounce", duration: 400 },
           //draggable: true,
@@ -401,7 +401,7 @@ function GeneratePuzzlePieces()
     var topPX = 0;
 
 
-    for(let i = 0; i< 28; i++){
+    for(let i = 0; i< 15; i++){
         
         //Creates pieces of puzzle 
         $( "#square_ref" ).clone().appendTo( "#grid_container" ).show().find(".puzzle_piece").css("background-image","url(img/landscape_pink.png)").css("background-position","left "+ leftPX +"px top "+ topPX +"px").parent().parent().parent().attr('idPiece', idPiece).attr('id', '');
@@ -482,10 +482,9 @@ function switchPieces(idpA,idpB) {
     orderPieces[posB] = idpA;
  
     //I create a temp grid container
-    $('.content').append('<div id="grid_container" class="grid grid--effect-vega"></div>');  
+    //$('.content').append('<div id="grid_container" class="grid grid--effect-vega"></div>');  
 
     for(i = 0; i < orderPieces.length; i++){
-    //    console.log("idpiece " + (i+1) + " - " + orderPieces[i]);
         $("#grid_container").append($("a[idpiece|='" + orderPieces[i] + "']"));
         $("a[idpiece|='" + orderPieces[i] + "']").attr('posPiece', i);
     }

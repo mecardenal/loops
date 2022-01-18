@@ -1,7 +1,8 @@
 ﻿body
 {
-	background: url("img/lineas_trans.png");
+	background: url("img/sketch_brainloop.png");
 	font-family: "Segoe UI", Arial, sans-serif;
+	background-size: 100%;
 }
 
 .safemode
@@ -100,4 +101,9 @@
 	
 	z-index:102;
 	display:none;
+}
+
+.ui-widget-overlay
+{
+	background-color:#f90d0d14 !important; 
 }
