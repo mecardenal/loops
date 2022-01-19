@@ -118,8 +118,8 @@ $( document ).ready(function() {
    
       if (sm == 5)
       {      
-          popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
-          popUpStart.showPopUp();
+          //popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
+          //popUpStart.showPopUp();
 
       }
 
