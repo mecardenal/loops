@@ -523,7 +523,7 @@ $("#restart_button").click(function(){
 });
 
 //Disable right click
-//document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', event => event.preventDefault());
 
 //hide close button
 //.children(".ui-dialog-titlebar-close").hide(); 
