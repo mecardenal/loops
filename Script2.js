@@ -118,8 +118,8 @@ $( document ).ready(function() {
    
       if (sm == 5)
       {      
-          popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
-          popUpStart.showPopUp();
+          //popUpStart = new PopUp4('They totally know',  { my: "center", at: "middle"});
+          //popUpStart.showPopUp();
 
       }
 
@@ -523,7 +523,7 @@ $("#restart_button").click(function(){
 });
 
 //Disable right click
-//document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', event => event.preventDefault());
 
 //hide close button
 //.children(".ui-dialog-titlebar-close").hide(); 
