@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery-ui/jquery-ui.js"></script>
+
+    <title></title>
+
+</head>
+<body>
+<div class='safemode leftup'>Safe Mode</div>
+<div class='safemode rightup'>Safe Mode</div>
+<div class='safemode rightbottom'>Safe Mode</div>
+<div class='safemode leftbottom'>Safe Mode</div>
+<div class="trashcan_container">
+<div class=' trashcan'><img src='img/delete.png' width='200px'></div>
+<div class=' trashcan_open' style='display:none'><img src='img/delete_open.png' width='200px'></div>
+</div>
+
+<section class="content">
+<div id="winning_screen" style="display:none"><div>WELL DONE!</div><div style="font-size:100px; clear:both">Thanks for playing</div>
+<a href="brainbugs.html">Play again</a>
+</div>
+<div class="grid grid--effect-vega" id="grid_container">
+</div>
+<div id="restart_button">Restart game</div>
+</section>
+
+<div id="popups">
+</div>
+
+<a class="grid__item grid__item--c1" id="square_ref" style="display:none">
+	<div class="stack">
+		<div class="stack__deco"></div>
+		<div class="stack__deco"></div>
+		<div class="stack__deco"></div>
+		<div class="stack__deco"></div>
+		<div class="stack__figure">
+			<div class="puzzle_piece" style=" width:100%; height: 100%;"></div>
+		</div>
+	</div>
+	<div class="grid__item-caption" style="display:none;">
+		<h3 class="grid__item-title"></h3>
+							
+
+	</div>
+</a>
+
+<div id="blue_screen" style="position: absolute; top: 0px;display:none;    width: 100%;">
+	<img src='img/blueScreenError.png' style=" width: 100%;">
+	<div id="safemode_button">Restart in Safe Mode</div>
+</div>
+
+
+<script src="Script2.js"></script>
+<script src="js/anime.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

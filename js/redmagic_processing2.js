@@ -1,37 +1,35 @@
 var sketchProc = function(processing) {
 
   var thought = " ";
-
-  //processing.setup(){
-
-  //};
-
   // Override draw function, by default it will be called 60 times per second
   processing.draw = function() {
 
 
     //The following code is only exceuted if the input text is changing
-    if(thought != document.getElementById('write_thought').value) {
-      console.log(document.getElementById('write_thought').value);    
+    if(thought != document.getElementById('write_thought').value ) {
+      //console.log(document.getElementById('write_thought').value);    
+      
 
-          //We draw the encrypted image
-     //with (processing) {
-               
-            size(1200,600);
+
+     //We draw the encrypted image
+             
+        size(1300,1200);
 
         // Type YOUR MESSAGE (capitals and numbers only)
         var message=document.getElementById('write_thought').value.toUpperCase();
 
         // Select size of a pixel
-        var pixel=4;
+        var pixel=8;
 
         // Select the distance between edge of the image and the text
-        var padding=0;
+        var padding=25;
 
         // Select difficulty
         var difficulty=4; 
         //0=easy, 4=ballanced, 10=difficult, 20=impossible, 50=random
 
+        var line_h = 20;
+        var line_w = 142;
 
         //----- CODE -----
 
@@ -43,7 +41,7 @@ var sketchProc = function(processing) {
         var purpleLow = 200;
 
         //initial cursor position
-        var typingPos = [padding+4, padding];
+        var typingPos = [padding+4, padding-line_h];
 
         var odstin=random()*255;
         var satur=255;
@@ -71,6 +69,9 @@ var sketchProc = function(processing) {
         var Gy=[ 3,  4,  5,  2,  6,  1,  4,  6, 1, 5, 6, 1, 2, 3];
         var Hx=[-4, -3, -2, -2, -1, -1, -1, 0, 0, 1, 2];
         var Hy=[ 4,  3,  2,  6,  1,  3,  5, 0, 4, 3, 2];
+        //Straight I
+        //var Ix=[ 2, 2, 2, 2, 2];
+        //var Iy=[ 4,  3,  2,  1, 0];
         var Ix=[-4, -3, -2, -1, 0];
         var Iy=[ 4,  3,  2,  1, 0];
         var Jx=[-3, -3, -3, -2, -1, 0, 0, 1, 1, 2, 2, 3];
@@ -129,6 +130,7 @@ var sketchProc = function(processing) {
         var n9y=[ 4,  5,  6,  2,  3,  6, 1, 4, 6, 1, 4, 5, 2, 3, 4];
         }
 
+        var line = 1;
         var addSymbol=function(symbolX, symbolY){
             var symbolSize=0;
         
@@ -138,9 +140,36 @@ var sketchProc = function(processing) {
                 symbolSize=max(symbolSize, symbolX[i]+symbolY[i]);
             }
 
-            typingPos=[typingPos[0]+round(symbolSize/2)+2, typingPos[1]+round(symbolSize/2)+2];
+          //  typingPos=[typingPos[0]+round(symbolSize/2)+2, typingPos[1]+round(symbolSize/2)+2];
+             
+             // console.log(" / typingpos: " + typingPos[0] + " " + typingPos[1]);
+
+
+              if((typingPos[0] > line_w)&&(line == 1)){
+                console.log("FINAL DE LINIA 1");
+                typingPos= [padding-5, padding-14];
+                line++;
+              }else if((typingPos[0] > line_w)&&(line == 2)){
+                console.log("FINAL DE LINIA 2");
+                typingPos= [padding-11, padding-8];
+                line++;
+              }else if((typingPos[0] > (line_w-10))&&(line == 3)){
+                console.log("FINAL DE LINIA 3");
+                typingPos= [padding-16, padding+2];
+                line++;
+              }else if((typingPos[0] > (line_w-10))&&(line == 4)){
+                console.log("FINAL DE LINIA 4");
+                //typingPos= [padding-16, padding+2];
+                line++;
+              }
+              else{
+                 typingPos=[typingPos[0]+round(symbolSize/2)+2, typingPos[1]+round(symbolSize/2)+2];
+              }
+
         };
 
+
+     // if(line < 4){ 
         //Message construtcion
         for(var i=0; i<message.length; i++){
 
@@ -257,9 +286,9 @@ var sketchProc = function(processing) {
                     typingPos[0]+=4;
                     typingPos[1]+=4;
             }
-
+                
         }
-
+        //}
         //Message typing
         var hledej=function(pozX, pozY){
             for(var k=0; k<MessageX.length; k++){
@@ -291,23 +320,34 @@ var sketchProc = function(processing) {
                 satur=255;
                 pom=random()*100;
                 if(hledej(i,j)){
+                    //Texto
                     if (pom>difficulty){
                         selectCyan();
                     } else {
                         selectRed();
                     }
-                } else if((abs(i-j)<7 && abs(i*pixel+j*pixel-width)<(width-1.9*pixel*(padding)))|| odstin<155) { 
+                } else if((abs(i-j)<30 && abs(i*pixel+j*pixel-width)<(width-1.9*pixel*(padding-10)))|| odstin<155) { 
+                    //Fondo texto
                     if (pom>difficulty){
                         selectRed();
                     } else {
                         selectCyan();
                     }
                 } else{
+ /*
+                    if (pom>difficulty){
+                        selectRed();
+                    } else {
+                        selectCyan();
+                    }
+                     codigo original:*/
+                    //Fondo canvas
                     if(pom<50) {
                         selectCyan();
                     } else {
                         selectRed();
                     }
+                    
                 }
                 fill(odstin,satur,255);
                 rect(pixel*i,pixel*j,pixel,pixel);

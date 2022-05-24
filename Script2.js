@@ -1,4 +1,8 @@
 // JavaScript source code
+    const error_audio = new Audio("sound/error_pc.flac");
+    const music_bg = new Audio("sound/Azure - Sextile.mp3");
+
+  const error_windows = new Audio("sound/error_window.mp3");
 
 $( document ).ready(function() {
 
@@ -6,6 +10,10 @@ $( document ).ready(function() {
     chufle();
     assignPosPiece();
     
+
+
+
+
         // (function() {
 		//	[].slice.call(document.querySelectorAll('.grid--effect-vega > .grid__item')).forEach(function(stackEl) {
 		//		new VegaFx(stackEl);
@@ -51,6 +59,13 @@ $( document ).ready(function() {
     var idpB = 0;
 
     $(".grid__item").click(function() {
+
+        //Music starts with first click
+        if(n == 0){
+         music_bg.play();
+         music_bg.volume = 0.2;
+        }
+
 
       //counter of clicks on the puzzle
       n++;
@@ -152,6 +167,9 @@ class PopUp1 {
             ]
 
         }).prev(".ui-dialog-titlebar").css("background","#ff3e30").css("color","white"); 
+
+         error_audio.play();
+         
       };
 
 
@@ -190,7 +208,7 @@ class PopUp2 {
             {
                  $( this ).parent().css("float","right");
             });
-     
+              error_audio.play();
       };
 
 
@@ -243,6 +261,7 @@ class PopUp3 {
               
           
           }); 
+                 error_audio.play();
       };
 
 
@@ -376,6 +395,8 @@ function blueScreen()
     $(".ui-dialog").remove();
     $("#popups").empty();
     $("#blue_screen").show();
+    music_bg.pause();
+    error_windows.play();
 }
 
 function replicatePopUp(message)

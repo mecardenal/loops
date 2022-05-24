@@ -20,8 +20,10 @@ body {
 }
 
 body {
-  background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #b7e87b 100%);
+   background-image: url(img/red_secret_bg.jpg);
   overflow: hidden;
+ *  cursor: url("img/cursor.svg"), auto;
+cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='128' height='80' viewport='0 0 100 100' style='fill:black;font-size:300px;'><text y='216%' x='-70%'>💩</text></svg>") 16 0,auto;
 }
 
 .ocean {
@@ -91,7 +93,7 @@ bottom: -250px;
 
 .ocean1
 {
-margin-bottom: -610px;
+	margin-bottom: -610px;
 
 }
 
@@ -106,7 +108,16 @@ margin-bottom: -610px;
 	background-position:calc(100% - 221px) 100%;
 }
 
+#mycanvas
+{
+transform: rotate(315deg);
+MARGIN-LEFT: 200PX;
+margin-top: -300px;
+}
 
+#write_thought{
+	opacity: 0;
+}
 
 </style>
 
@@ -114,7 +125,7 @@ margin-bottom: -610px;
 
 <body>
 
-	<canvas id="mycanvas"></canvas>
+<canvas id="mycanvas"></canvas>
 
 <div><textarea id='write_thought'></textarea></div>
 <div id='letitgo'>Let it go</div>
@@ -135,20 +146,29 @@ margin-bottom: -610px;
 	
 	$( document ).ready(function() {
 	   
+	   //Animation of waves erasing text
 	   $("#letitgo").on("click",function(){
 	   		$(".ocean, .wave").show().animate({opacity:1}, 2000, function(){
 	   			$(".ocean").animate({
-	   			 "margin-bottom": "-150px"
+	   				"margin-bottom": "-150px"
 	   			}, 2000, function(){
 	   				$(".ocean").animate({
-	   					//"margin-bottom": "-550px"
 	   					bottom: "-800px",
 	   					opacity:0
-	   				}, 800);
+	   				}, 800, function(){
+	   					$(".ocean, .wave").hide();
+	   				});
 	   			});	
 	   		});
 
 	   		$("#write_thought").val("");
+	   });
+
+	   //Setting cursor in textarea on loading site
+	   $("#write_thought").focus();
+
+	   $("#mycanvas, body").on("click",function(){
+	   	   $("#write_thought").focus();
 	   });
 
 	});
