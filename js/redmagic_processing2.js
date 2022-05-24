@@ -1,17 +1,32 @@
-var sketchProc = function(processingInstance) {
+var sketchProc = function(processing) {
 
-    with (processingInstance) {
+  var thought = " ";
+
+  //processing.setup(){
+
+  //};
+
+  // Override draw function, by default it will be called 60 times per second
+  processing.draw = function() {
+
+
+    //The following code is only exceuted if the input text is changing
+    if(thought != document.getElementById('write_thought').value) {
+      console.log(document.getElementById('write_thought').value);    
+
+          //We draw the encrypted image
+     //with (processing) {
                
-        size(400,400);
+            size(1200,600);
 
         // Type YOUR MESSAGE (capitals and numbers only)
-        var message="MALA LENA KOZA";
+        var message=document.getElementById('write_thought').value.toUpperCase();
 
         // Select size of a pixel
         var pixel=4;
 
         // Select the distance between edge of the image and the text
-        var padding=5;
+        var padding=0;
 
         // Select difficulty
         var difficulty=4; 
@@ -116,18 +131,19 @@ var sketchProc = function(processingInstance) {
 
         var addSymbol=function(symbolX, symbolY){
             var symbolSize=0;
+        
             for(var i=0; i<symbolX.length; i++){
                 MessageX.push(symbolX[i]+typingPos[0]);
                 MessageY.push(symbolY[i]+typingPos[1]);
                 symbolSize=max(symbolSize, symbolX[i]+symbolY[i]);
             }
+
             typingPos=[typingPos[0]+round(symbolSize/2)+2, typingPos[1]+round(symbolSize/2)+2];
         };
 
         //Message construtcion
         for(var i=0; i<message.length; i++){
 
-            console.log(message[i]);
             switch(message[i]){
                 case "A":
                     addSymbol(Ax,Ay);
@@ -297,7 +313,58 @@ var sketchProc = function(processingInstance) {
                 rect(pixel*i,pixel*j,pixel,pixel);
             }
         }
+    //}
+
+
+
+
     }
+
+    //We update the input text
+    thought = document.getElementById('write_thought').value;
+
+
+
+
+    /*
+
+
+    // determine center and max clock arm length
+    var centerX = processing.width / 2, centerY = processing.height / 2;
+    var maxArmLength = Math.min(centerX, centerY);
+
+    function drawArm(position, lengthScale, weight) {      
+      processing.strokeWeight(weight);
+      processing.line(centerX, centerY, 
+        centerX + Math.sin(position * 2 * Math.PI) * lengthScale * maxArmLength,
+        centerY - Math.cos(position * 2 * Math.PI) * lengthScale * maxArmLength);
+    }
+
+    // erase background
+    processing.background(224);
+
+    var now = new Date();
+
+    // Moving hours arm by small increments
+    var hoursPosition = (now.getHours() % 12 + now.getMinutes() / 60) / 12;
+    drawArm(hoursPosition, 0.5, 5);
+
+    // Moving minutes arm by small increments
+    var minutesPosition = (now.getMinutes() + now.getSeconds() / 60) / 60;
+    drawArm(minutesPosition, 0.80, 3);
+
+    // Moving hour arm by second increments
+    var secondsPosition = now.getSeconds() / 60;
+    drawArm(secondsPosition, 0.90, 1);
+ 
+*/
+
+  };
+
+
+
+
+   
 
 
 };
@@ -305,6 +372,6 @@ var sketchProc = function(processingInstance) {
 // Get the canvas that Processing-js will use
 var canvas = document.getElementById("mycanvas");
 // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
-var processingInstance = new Processing(canvas, sketchProc);
+var processing = new Processing(canvas, sketchProc);
 
 

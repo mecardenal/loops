@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"> 
+	<title></title>
+	<!-- 	<script type="text/javascript" src="js/p5.js"> </script>
+	<script type="text/javascript" src="js/redmagic_p5.js"> </script> 
+	 	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.js"></script> 
+	-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://localhost/loops/js/processing.js"></script> 	
+
+<style>
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #b7e87b 100%);
+  overflow: hidden;
+}
+
+.ocean {
+  height: 120%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #4AFFFF;
+}
+
+.wave {
+  background: url("img/wave.svg") repeat-x;
+  position: absolute;
+  top: -198px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -175px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+@keyframes swell {
+  0%,
+	100% {
+    transform: translate3d(0, -25px, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
+  }
+}
+.endWave{
+	display:none;
+}
+	    
+#letitgo
+{
+	padding: 5px;
+	background-color:  white;
+	cursor:  pointer;
+	float: left;
+}
+
+.ocean, .wave
+{
+	opacity: 0;
+	display: none;
+}
+
+.ocean
+{
+bottom: -250px;
+}
+
+.ocean1
+{
+margin-bottom: -610px;
+
+}
+
+.ocean2
+{
+	margin-bottom: -810px;
+
+}
+
+.wave_offset
+{
+	background-position:calc(100% - 221px) 100%;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+	<canvas id="mycanvas"></canvas>
+
+<div><textarea id='write_thought'></textarea></div>
+<div id='letitgo'>Let it go</div>
+<!-- Animation with sea waves -->
+
+<div id="grupo_oceano">
+	<div class="ocean ocean1" style="">
+	  <div class="wave wave_offset"></div>
+	  <div class="wave wave_offset"></div>
+	</div>
+	<div class="ocean ocean2">
+	  <div class="wave"></div>
+	  <div class="wave"></div>
+	</div>
+</div>
+<script type="text/processing" data-processing-target="mycanvas" src="http://localhost/loops/js/redmagic_processing2.js"></script>
+<script type="text/javascript">
+	
+	$( document ).ready(function() {
+	   
+	   $("#letitgo").on("click",function(){
+	   		$(".ocean, .wave").show().animate({opacity:1}, 2000, function(){
+	   			$(".ocean").animate({
+	   			 "margin-bottom": "-150px"
+	   			}, 2000, function(){
+	   				$(".ocean").animate({
+	   					//"margin-bottom": "-550px"
+	   					bottom: "-800px",
+	   					opacity:0
+	   				}, 800);
+	   			});	
+	   		});
+
+	   		$("#write_thought").val("");
+	   });
+
+	});
+
+</script>
+</body>
+
+</html>
