@@ -1,14 +1,18 @@
 var sketchProc = function(processing) {
+  
+  const music_bg = new Audio("sound/Tratak - Jesse Gallagher.mp3");
 
+  const sound_alert = new Audio("sound/alert.wav");
   var thought = " ";
+  var first_load = 1;
   // Override draw function, by default it will be called 60 times per second
   processing.draw = function() {
-
+    music_bg.play();
 
     //The following code is only exceuted if the input text is changing
-    if(thought != document.getElementById('write_thought').value ) {
+    if((thought != document.getElementById('write_thought').value ) || (first_load == 1)) {
       //console.log(document.getElementById('write_thought').value);    
-      
+
 
 
      //We draw the encrypted image
@@ -16,7 +20,13 @@ var sketchProc = function(processing) {
         size(1300,1200);
 
         // Type YOUR MESSAGE (capitals and numbers only)
-        var message=document.getElementById('write_thought').value.toUpperCase();
+        if(first_load == 1)
+        {
+            var message = "WRITE YOUR THOUGHT HERE";
+            first_load = 0;
+        } else {
+            var message=document.getElementById('write_thought').value.toUpperCase(); 
+        }
 
         // Select size of a pixel
         var pixel=8;
@@ -140,10 +150,7 @@ var sketchProc = function(processing) {
                 symbolSize=max(symbolSize, symbolX[i]+symbolY[i]);
             }
 
-          //  typingPos=[typingPos[0]+round(symbolSize/2)+2, typingPos[1]+round(symbolSize/2)+2];
-             
-             // console.log(" / typingpos: " + typingPos[0] + " " + typingPos[1]);
-
+ 
 
               if((typingPos[0] > line_w)&&(line == 1)){
                 console.log("FINAL DE LINIA 1");
@@ -157,9 +164,10 @@ var sketchProc = function(processing) {
                 console.log("FINAL DE LINIA 3");
                 typingPos= [padding-16, padding+2];
                 line++;
-              }else if((typingPos[0] > (line_w-10))&&(line == 4)){
+              }else if((typingPos[0] > (line_w-19))&&(line == 4)){
                 console.log("FINAL DE LINIA 4");
-                //typingPos= [padding-16, padding+2];
+                sound_alert.play();
+                document.getElementById('write_thought').value = message.slice(0, -1);
                 line++;
               }
               else{
@@ -365,7 +373,6 @@ var sketchProc = function(processing) {
 
 
 
-
     /*
 
 
@@ -404,14 +411,10 @@ var sketchProc = function(processing) {
 
 
 
-   
-
-
 };
 
 // Get the canvas that Processing-js will use
 var canvas = document.getElementById("mycanvas");
 // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
 var processing = new Processing(canvas, sketchProc);
-
 

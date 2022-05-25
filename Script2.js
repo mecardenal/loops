@@ -11,29 +11,6 @@ $( document ).ready(function() {
     assignPosPiece();
     
 
-
-
-
-        // (function() {
-		//	[].slice.call(document.querySelectorAll('.grid--effect-vega > .grid__item')).forEach(function(stackEl) {
-		//		new VegaFx(stackEl);
-		//	});
-
-		//})();
-    
-    //Test
-    //popUpStart = new PopUp1('Pop up 1',  { my: "center", at: "left"}, "Ignore", function(){$( this ).dialog( "close" ); });
-    //popUpStart.showPopUp();
-    
-    //popUpStart = new PopUp2('Pop up 2',  { my: "center", at: "center"}, "Ignore", function(){$( this ).dialog( "close" ); });
-   // popUpStart.showPopUp();
-
-    //popUpStart = new PopUp3('Pop up 3',  { my: "center", at: "right"});
-    //popUpStart.showPopUp();
- 
-   // popUpStart = new PopUp4('Pop up 4',  { my: "center", at: "middle"});
-    //popUpStart.showPopUp();   
-        
     //Counts how many times mouse is over a square    
     var n = 0;
     //times on safe mode
@@ -395,7 +372,7 @@ function blueScreen()
     $(".ui-dialog").remove();
     $("#popups").empty();
     $("#blue_screen").show();
-    music_bg.pause();
+    //music_bg.pause();
     error_windows.play();
 }
 
@@ -539,7 +516,7 @@ $("#restart_button").click(function(){
    
    var confirm_restart = confirm("Are you sure you want to restart the game?");
    if (confirm_restart == true){
-          location.reload();
+          window.location = "index.html";
    }
 });
 

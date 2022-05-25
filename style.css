@@ -113,7 +113,7 @@
 {
     width: 1120px;
     margin: 0px auto;
-	padding-top: 100px;
+	*padding-top: 100px;
 }
 
 a[issel="selA"] , a[issel="selB"] 
@@ -152,4 +152,17 @@ a[issel="selA"] , a[issel="selB"]
     cursor: pointer;
     margin-top: 20px;
 	font-size: 20px;
+}
+
+#title
+{
+    margin: 0px auto;
+    width: 525px;
+    padding-top: 15px;
+}
+
+.content 
+{
+	
+	    padding-top: 20px !important;
 }
