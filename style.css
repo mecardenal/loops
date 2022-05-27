@@ -166,3 +166,13 @@ a[issel="selA"] , a[issel="selB"]
 	
 	    padding-top: 20px !important;
 }
+
+#playagain_button {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+    background-color: #ffffff47;
+    padding: 10px 20px;
+    border: 1px solid;
+}
