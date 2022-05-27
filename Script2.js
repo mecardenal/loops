@@ -394,7 +394,7 @@ var safemode = 0;
 $("#safemode_button").on("click",function(){
     $("#blue_screen").remove();
     $(".safemode").show();
-    $(".trashcan_container").show();
+  //  $(".trashcan_container").show();
     chufle();
     safemode = 1;
 });
